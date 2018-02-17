@@ -10,10 +10,10 @@ wsdlLocation="ajs.wsdl")
 public class DefaultAjsService {
 	private StudentMysqlDao dao = Factory.INSTANCE.getStudentMysqlDao();
 	
-	public AddStudentResponse addStudent (AddStudentRequest request) {
-		long id = dao.addStudent(request.getName(), request.getSurname());
+	public AddStudentResponse addStudent (AddStudentRequest request) throws StudentExists_Exception {
+		String UUID = dao.addStudent(request.getName(), request.getSurname());
 		AddStudentResponse response = new AddStudentResponse();
-		response.setId(id);
+		response.setId(UUID);
 		return response;
 	}
 	

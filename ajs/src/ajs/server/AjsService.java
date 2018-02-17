@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ajsService", targetNamespace = "urn:ajs", wsdlLocation = "file:/C:/Users/July/eclipse-workspace/ajs/ajs.wsdl")
+@WebServiceClient(name = "ajsService", targetNamespace = "urn:ajs", wsdlLocation = "http://localhost:8080/ajs/ws?wsdl")
 public class AjsService
     extends Service
 {
@@ -30,7 +30,7 @@ public class AjsService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/C:/Users/July/eclipse-workspace/ajs/ajs.wsdl");
+            url = new URL("http://localhost:8080/ajs/ws?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

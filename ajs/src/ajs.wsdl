@@ -2,73 +2,90 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:ajs"
 	name="ajs" targetNamespace="urn:ajs">
-<wsdl:types>
-	<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:ajs">
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="urn:ajs">
 
 
-		<xsd:element name="AddStudentRequest">
-			<xsd:complexType>
-				<xsd:sequence>
-					<xsd:element name="name" type="xsd:string" />
-					<xsd:element name="surname" type="xsd:string" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:element>
-		<xsd:element name="AddStudentResponse">
-			<xsd:complexType>
-				<xsd:sequence>
-					<xsd:element name="id" type="xsd:long" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:element>
+			<xsd:element name="AddStudentRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="name" type="xsd:string" />
+						<xsd:element name="surname" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AddStudentResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="id" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="StudentExists">
+				<xsd:complexType>
+					<xsd:all>
+						<xsd:element name="ErrorMessage" type="xsd:string" />
+					</xsd:all>
+				</xsd:complexType>
+			</xsd:element>
 
-	</xsd:schema>
-</wsdl:types>
-
-
-
-<wsdl:message name="AddStudentRequest">
-	<wsdl:part name="AddStudentRequestPart" element="tns:AddStudentRequest"></wsdl:part>
-</wsdl:message>
-<wsdl:message name="AddStudentResponse">
-	<wsdl:part name="AddStudentResponsePart" element="tns:AddStudentResponse"></wsdl:part>
-</wsdl:message>
-
-
-<wsdl:portType name="ajsPort">
-
-	<wsdl:operation name="AddStudent">
-		<wsdl:input message="tns:AddStudentRequest"></wsdl:input>
-		<wsdl:output message="tns:AddStudentResponse"></wsdl:output>
-	</wsdl:operation>
-
-</wsdl:portType>
+		</xsd:schema>
+	</wsdl:types>
 
 
 
+	<wsdl:message name="AddStudentRequest">
+		<wsdl:part name="AddStudentRequestPart" element="tns:AddStudentRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="AddStudentResponse">
+		<wsdl:part name="AddStudentResponsePart" element="tns:AddStudentResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="StudentExists">
+		<wsdl:part name="fault" element="tns:StudentExists"></wsdl:part>
+	</wsdl:message>
 
-<wsdl:binding name="ajsBinding" type="tns:ajsPort">
-	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 
-	<wsdl:operation name="AddStudent">
-		<wsdl:input>
-			<soap:body use="literal" />
-		</wsdl:input>
-		<wsdl:output>
-			<soap:body use="literal" />
-		</wsdl:output>
-	</wsdl:operation>
+	<wsdl:portType name="ajsPort">
 
-</wsdl:binding>
+		<wsdl:operation name="AddStudent">
+			<wsdl:input message="tns:AddStudentRequest"></wsdl:input>
+			<wsdl:output message="tns:AddStudentResponse"></wsdl:output>
+			<wsdl:fault message="tns:StudentExists" name="StudentExists"></wsdl:fault>
+		</wsdl:operation>
+
+	</wsdl:portType>
 
 
 
 
-<wsdl:service name="ajsService">
-	<wsdl:port name="ajsPort" binding="tns:ajsBinding">
-		<soap:address location="http://localhost:8080/ajs/ws" />
-	</wsdl:port>
-</wsdl:service>
+	<wsdl:binding name="ajsBinding" type="tns:ajsPort">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+
+		<wsdl:operation name="AddStudent">
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+
+
+			<wsdl:fault name="StudentExists">
+				<soap:fault name="StudentExists" use="literal" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+
+
+
+	<wsdl:service name="ajsService">
+		<wsdl:port name="ajsPort" binding="tns:ajsBinding">
+			<soap:address location="http://localhost:8080/ajs/ws" />
+		</wsdl:port>
+	</wsdl:service>
 
 
 

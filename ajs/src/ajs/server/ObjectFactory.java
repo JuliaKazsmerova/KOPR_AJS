@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the ajs package. 
+ * generated in the ajs.server package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,7 +23,7 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ajs
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ajs.server
      * 
      */
     public ObjectFactory() {
@@ -35,6 +35,14 @@ public class ObjectFactory {
      */
     public AddStudentRequest createAddStudentRequest() {
         return new AddStudentRequest();
+    }
+
+    /**
+     * Create an instance of {@link StudentExists }
+     * 
+     */
+    public StudentExists createStudentExists() {
+        return new StudentExists();
     }
 
     /**

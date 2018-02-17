@@ -38,6 +38,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link StudentExists }
+     * 
+     */
+    public StudentExists createStudentExists() {
+        return new StudentExists();
+    }
+
+    /**
      * Create an instance of {@link AddStudentResponse }
      * 
      */

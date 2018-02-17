@@ -27,12 +27,15 @@ public interface AjsPort {
      * 
      * @param addStudentRequestPart
      * @return
-     *     returns ajs.AddStudentResponse
+     *     returns ajs.server.AddStudentResponse
+     * @throws StudentExists_Exception
      */
     @WebMethod(operationName = "AddStudent")
     @WebResult(name = "AddStudentResponse", targetNamespace = "urn:ajs", partName = "AddStudentResponsePart")
     public AddStudentResponse addStudent(
         @WebParam(name = "AddStudentRequest", targetNamespace = "urn:ajs", partName = "AddStudentRequestPart")
-        AddStudentRequest addStudentRequestPart);
+        AddStudentRequest addStudentRequestPart)
+        throws StudentExists_Exception
+    ;
 
 }
